@@ -1,4 +1,4 @@
-# Algorithm for QR Decomposition
+ # Algorithm for QR Decomposition
 ## Aim:
 To implement QR decomposition algorithm using the Gram-Schmidt method.
 ## Equipment’s required:
@@ -24,43 +24,37 @@ To implement QR decomposition algorithm using the Gram-Schmidt method.
 ## Program:
 ### Gram-Schmidt Method
 ```
-# Register No: 212222243003
-# Developed By: praveen ck
-# 1-Norm of a Matrix
+Program to QR decomposition using the Gram-Schmidt method
+Developed by: KAVINRAJA D
+RegisterNumber: 22007928
 
 import numpy as np
-mat =np.array(eval(input()))
-ans=np.linalg.norm(mat,1)
-norm_of_matrix = "{:.2f}".format(ans)
-print(norm_of_matrix)
-
-# 2-Norm of a Matrix
-
-import numpy as np
-mat=np.array(eval(input()))
-ans=np.linalg.norm(mat,2)
-norm_of_matrix='{:.2f}'.format(ans)
-print(norm_of_matrix)
-
-# Infinity Norm of a Matrix
-
-import numpy as np
-mat=np.array(eval(input()))
-ans=np.linalg.norm(mat,np.inf)
-norm_of_matrix="{:.2f}".format(ans)
-print(norm_of_matrix)
+def QR_Decomposition(A):
+    n,m=A.shape
+    Q=np.empty((n,n))
+    u=np.empty((n,n))
+    u[:,0]=A[:,0]
+    Q[:,0]=u[:,0]/np.linalg.norm(u[:,0])
+    for i in range(1,n):
+        u[:,i]=A[:,i]
+        for j in range(i):
+            u[:,i]-=(A[:,i]@Q[:,j])*Q[:,j]
+        Q[:,i] = u[:,i]/np.linalg.norm(u[:,i])
+    R=np.zeros((n,m))
+    for i in range(n):
+        for j in range(i,m):
+            R[i,j]=A[:,j]@Q[:,i]
+    print(Q)
+    print(R)
+a = np.array(eval(input()))
+QR_Decomposition(a)
 
 
 
 
 ```
 ## Output
-## 1-Norm of a Matrix
-![Screenshot 2023-11-14 194728](https://github.com/praveenck23009864/QRdecomposition/assets/141472050/defdd305-7cd8-4d8d-9879-214c0a6e29ce)
-## 2-Norm of a Matrix
-![Screenshot 2023-11-14 194747](https://github.com/praveenck23009864/QRdecomposition/assets/141472050/449b2558-a350-452d-b5bd-ecce204a1743)
-## 3-Infinity Norm of a Matrix
-![Screenshot 2023-11-14 194817](https://github.com/praveenck23009864/QRdecomposition/assets/141472050/7e158881-43a8-40a7-8e92-d0e8de00d93e)
+![Screenshot 2023-11-14 204248](https://github.com/praveenck23009864/QRdecomposition/assets/141472050/81b8cca1-eb01-4363-b6c0-3d49d47fd4b6)
 
 
 
